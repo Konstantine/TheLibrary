@@ -71,14 +71,14 @@
     <Compile Include="DAL\Author.cs">
       <DependentUpon>TheLibraryModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="DAL\AuthorService.cs" />
+    <Compile Include="Services\AuthorService.cs" />
     <Compile Include="DAL\Book.cs">
       <DependentUpon>TheLibraryModel.tt</DependentUpon>
     </Compile>
     <Compile Include="DAL\BookIssuance.cs">
       <DependentUpon>TheLibraryModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="DAL\BookService.cs" />
+    <Compile Include="Services\BookService.cs" />
     <Compile Include="DAL\TheLibraryModel.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -97,7 +97,7 @@
     <Compile Include="DAL\User.cs">
       <DependentUpon>TheLibraryModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="DAL\UserService.cs" />
+    <Compile Include="Services\UserService.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
