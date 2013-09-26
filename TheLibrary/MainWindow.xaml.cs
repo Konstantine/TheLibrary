@@ -36,5 +36,15 @@ namespace TheLibrary
         {
             AuthorsDataGrid.ItemsSource = (new AuthorService()).GetPopularInYear(int.Parse(YearTextBox.Text));
         }
+
+        private void AllBooksButton_Click(object sender, RoutedEventArgs e)
+        {
+            BooksDataGrid.ItemsSource = (new BookService()).GetAllBooks();
+        }
+
+        private void AuthorsBooksButton_Click(object sender, RoutedEventArgs e)
+        {
+            BooksDataGrid.ItemsSource = (new BookService()).GetAuthorBooks(AuthorTextBox.Text);
+        }
     }
 }
