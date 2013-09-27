@@ -50,5 +50,23 @@ namespace TheLibrary.Services
 
             return result;
         }
+
+        public IEnumerable<Book> GetAverageRateBook(int year)
+        {
+            IEnumerable<Book> result;
+            using (var context = new TheLibraryEntities())
+            {
+                int countBook = context.Books.Count();
+                int countIssuance = context.BookIssuances.Count(c => c.IssuanceDate.Year == year);
+                result = (from book in context.Books.Include("Author")
+                               select new
+                               {
+                                   Book = book,
+                                   Rate = (from rate in book.BookIssuances 
+                                           select rate.IssuanceDate).Count()
+                               }).Where(r => r.Rate > countIssuance / countBook && r.Rate != 0).Select(b => b.Book).ToList();
+            }
+            return result;
+        }
     }
 }

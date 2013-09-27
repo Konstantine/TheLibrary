@@ -27,12 +27,12 @@ namespace TheLibrary
             
         }
 
-        private void Button_Click_1(object sender, RoutedEventArgs e)
+        private void AllAuthors_Click(object sender, RoutedEventArgs e)
         {
             AuthorsDataGrid.ItemsSource = (new AuthorService()).GetAllAuthors();
         }
 
-        private void Button_Click_2(object sender, RoutedEventArgs e)
+        private void PopularInYear_Click(object sender, RoutedEventArgs e)
         {
             AuthorsDataGrid.ItemsSource = (new AuthorService()).GetPopularInYear(int.Parse(YearTextBox.Text));
         }
@@ -45,6 +45,21 @@ namespace TheLibrary
         private void AuthorsBooksButton_Click(object sender, RoutedEventArgs e)
         {
             BooksDataGrid.ItemsSource = (new BookService()).GetAuthorBooks(AuthorTextBox.Text);
+        }
+
+        private void Namesakes_Click(object sender, RoutedEventArgs e)
+        {
+            AuthorsDataGrid.ItemsSource = (new AuthorService()).GetAllNamesakes();
+        }
+
+        private void AverageRateButton_Click(object sender, RoutedEventArgs e)
+        {
+            BooksDataGrid.ItemsSource = (new BookService()).GetAverageRateBook(int.Parse(YearRateTextBox.Text));
+        }
+
+        private void AllUsers_Click(object sender, RoutedEventArgs e)
+        {
+            UsersDataGrid.ItemsSource = (new UserService()).GetAllUsers();
         }
     }
 }
