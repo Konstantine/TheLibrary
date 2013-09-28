@@ -78,6 +78,7 @@
     <Compile Include="DAL\BookIssuance.cs">
       <DependentUpon>TheLibraryModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Services\BookIssuanceService.cs" />
     <Compile Include="Services\BookService.cs" />
     <Compile Include="DAL\TheLibraryModel.Context.cs">
       <AutoGen>True</AutoGen>

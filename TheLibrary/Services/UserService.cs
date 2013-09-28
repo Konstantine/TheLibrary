@@ -10,17 +10,26 @@ namespace TheLibrary.Services
 {
     class UserService
     {
+        private TheLibraryEntities _context = new TheLibraryEntities();
+
         public IEnumerable<User> GetAllUsers()
         {
-            IEnumerable<User> result;
-            using (var context = new TheLibraryEntities())
-            {
-                result = (from user in context.Users
-                          select user).ToList();
-            }
-            return result;
+            return _context.Users.ToList();
         }
 
+        public void SaveChanges()
+        {
+            _context.SaveChanges();
+        }
+        public IEnumerable<User> GetBadUsers(DateTime date)
+        {
+            IEnumerable<User> result;
+            result = (from user in _context.Users
+                          where user.BookIssuances.Where(dt => dt.RequiredReturnDate < date && (!dt.RealReturnDate.HasValue || date < dt.RealReturnDate)).Count() > 0
+                          select user);
+            
+            return result;
+        }
         //public IEnumerable<User> UserIsBanned()
         //{
         //    using (var context = new TheLibraryEntities())

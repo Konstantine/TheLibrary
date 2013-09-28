@@ -58,13 +58,10 @@ namespace TheLibrary.Services
             {
                 int countBook = context.Books.Count();
                 int countIssuance = context.BookIssuances.Count(c => c.IssuanceDate.Year == year);
+                double averageRate = countIssuance / countBook;
                 result = (from book in context.Books.Include("Author")
-                               select new
-                               {
-                                   Book = book,
-                                   Rate = (from rate in book.BookIssuances 
-                                           select rate.IssuanceDate).Count()
-                               }).Where(r => r.Rate > countIssuance / countBook && r.Rate != 0).Select(b => b.Book).ToList();
+                          where book.BookIssuances.Where(i => i.IssuanceDate.Year == year).Count() > averageRate
+                          select book).ToList();
             }
             return result;
         }

@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using TheLibrary.Services;
+using TheLibrary.DAL;
 
 namespace TheLibrary
 {
@@ -21,10 +22,15 @@ namespace TheLibrary
     /// </summary>
     public partial class MainWindow : Window
     {
+        private UserService UserService = new UserService();
+        private BookIssuanceService IssuanceService = new BookIssuanceService();
+        private BookService BookService = new BookService();
+
         public MainWindow()
         {
             InitializeComponent();
-            
+            UsersComboBox.ItemsSource = UserService.GetAllUsers().Where(bu => !bu.IsBanned);
+            BooksComboBox.ItemsSource = BookService.GetAllBooks();
         }
 
         private void AllAuthors_Click(object sender, RoutedEventArgs e)
@@ -59,7 +65,41 @@ namespace TheLibrary
 
         private void AllUsers_Click(object sender, RoutedEventArgs e)
         {
-            UsersDataGrid.ItemsSource = (new UserService()).GetAllUsers();
+            UsersDataGrid.ItemsSource = UserService.GetAllUsers();
         }
+
+        private void BadUsersButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (BadDatePicker.SelectedDate.HasValue)
+            {
+                UsersDataGrid.ItemsSource = UserService.GetBadUsers(BadDatePicker.SelectedDate.Value);
+            }
+            else
+            {
+                MessageBox.Show("Укажите дату", "Error");
+            }
+        }
+
+        private void SaveUsersButton_Click(object sender, RoutedEventArgs e)
+        {
+            UserService.SaveChanges();
+        }
+
+        private void AllOperations_Click(object sender, RoutedEventArgs e)
+        {
+            OperationDataGrid.ItemsSource = IssuanceService.GetAllIssuance();
+        }
+
+        private void ReturnButton_Click(object sender, RoutedEventArgs e)
+        {
+            IssuanceService.ReturnBook((BookIssuance)OperationDataGrid.SelectedItem);
+            OperationDataGrid.ItemsSource = IssuanceService.GetAllIssuance();
+        }
+
+        private void OperationDataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            ReturnButton.IsEnabled = !((BookIssuance)OperationDataGrid.SelectedItem).RealReturnDate.HasValue;
+        }
+
     }
 }
