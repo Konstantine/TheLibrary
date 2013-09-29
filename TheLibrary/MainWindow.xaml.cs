@@ -142,5 +142,26 @@ namespace TheLibrary
             }
         }
 
+        private void UndefinedSearchButton_Click(object sender, RoutedEventArgs e)
+        {
+            string publish = PublishYearTextBox.Text;
+            string bookName = BookNameTextBox.Text;
+            BooksDataGrid.ItemsSource = BookService.GetUndefinedBook(publish, bookName);           
+        }
+
+        private void BadTopButton_Click(object sender, RoutedEventArgs e)
+        {
+            int year;
+            if (int.TryParse(BadTopYearTextBox.Text, out year) && year == DateTime.Now.Year)
+            {
+                UsersDataGrid.ItemsSource = UserService.GetTopBadUsers(DateTime.Now);
+            }
+            else
+            {
+                DateTime date = new DateTime(year, 12, 31);
+                UsersDataGrid.ItemsSource = UserService.GetTopBadUsers(date);
+            }
+        }
+
     }
 }

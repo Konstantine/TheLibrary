@@ -65,5 +65,30 @@ namespace TheLibrary.Services
             }
             return result;
         }
+
+        public IEnumerable<Book> GetUndefinedBook(string year, string name)
+        {
+            IEnumerable<Book> result;
+            int publish;
+            if (int.TryParse(year, out publish))
+            {
+                using (var context = new TheLibraryEntities())
+                {
+                    result = (from book in context.Books
+                              where (book.PublishDate.Value.Year == publish && book.Name == name) || (book.Name == name) || (book.PublishDate.Value.Year == publish)
+                              select book).ToList();
+                }
+            }
+            else
+            {
+                using (var context = new TheLibraryEntities())
+                {
+                    result = (from book in context.Books
+                              where (book.Name == name)
+                              select book).ToList();
+                }
+            }
+            return result;
+        }
     }
 }
