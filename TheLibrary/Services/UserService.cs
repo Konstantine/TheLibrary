@@ -21,21 +21,15 @@ namespace TheLibrary.Services
         {
             _context.SaveChanges();
         }
+
         public IEnumerable<User> GetBadUsers(DateTime date)
         {
             IEnumerable<User> result;
             result = (from user in _context.Users
                           where user.BookIssuances.Where(dt => dt.RequiredReturnDate < date && (!dt.RealReturnDate.HasValue || date < dt.RealReturnDate)).Count() > 0
-                          select user);
+                          select user).ToList();
             
             return result;
         }
-        //public IEnumerable<User> UserIsBanned()
-        //{
-        //    using (var context = new TheLibraryEntities())
-        //    {
- 
-        //    }
-        //}
     }
 }

@@ -6,8 +6,8 @@
         <AlternationConverter x:Key="AlternationConverter"/>
     </Window.Resources>
     <Grid>
-        <TabControl>
-            <TabItem Header="Авторы">
+        <TabControl SelectionChanged="TabControl_SelectionChanged_1">
+            <TabItem Header="Авторы" Name="AuthorsTabItem">
                 <Grid Background="#FFE5E5E5">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="133"/>
@@ -28,7 +28,7 @@
                     </StackPanel>
                 </Grid>
             </TabItem>
-            <TabItem Header="Книги">
+            <TabItem Header="Книги" Name="BooksTabItem">
                 <Grid Background="#FFE5E5E5">
                     <Grid.ColumnDefinitions>                       
                         <ColumnDefinition Width="133"/>
@@ -51,7 +51,7 @@
                     </StackPanel>
                 </Grid>
             </TabItem>
-            <TabItem Header="Пользователи">
+            <TabItem Header="Пользователи" Name="UsersTabItem">
                 <Grid Background="#FFE5E5E5">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="133"/>
@@ -66,13 +66,13 @@
                     </DataGrid>
                     <StackPanel>
                         <Button Content="Все" Name="AllUsers" HorizontalAlignment="Center" VerticalAlignment="Top" Width="120" Margin="0,5,0,0" Click="AllUsers_Click"/>
+                        <DatePicker x:Name="BadDatePicker" Margin="6,5,7,0"/>
                         <Button Content="Задолжники на" Name="BadUsersButton" HorizontalAlignment="Center" VerticalAlignment="Top" Width="120" Margin="6.5,5,6.5,0" Click="BadUsersButton_Click"/>
-                        <DatePicker Name="BadDatePicker" Margin="6,5,7,0"/>
-                        <Button Content="Сохранить" Name="SaveUsersButton" HorizontalAlignment="Center"   Width="120" Click="SaveUsersButton_Click"/>
+                        <Button Content="Сохранить" Name="SaveUsersButton" HorizontalAlignment="Center"   Width="120" Click="SaveUsersButton_Click" Margin="0,5,0,0"/>
                     </StackPanel>
                 </Grid>
             </TabItem>
-            <TabItem Header="Операции">
+            <TabItem Header="Операции" Name="OperationTabItem" >
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="133"/>
@@ -92,20 +92,11 @@
                         <Button Content="Все" Name="AllOperations" HorizontalAlignment="Center" VerticalAlignment="Top" Width="120" Margin="0,5,0,0" Click="AllOperations_Click"/>
                         <Button Content="Вернул" Name="ReturnButton" HorizontalAlignment="Center" VerticalAlignment="Top" Width="120" Margin="6.5,5,6.5,0" Click="ReturnButton_Click" IsEnabled="False"/>
                         <DatePicker Name="BadatePicker" Margin="6,5,7,0"/>
+                        <ComboBox DisplayMemberPath="Name"  SelectedValuePath="BookId" HorizontalAlignment="Center" Name="BooksComboBox" VerticalAlignment="Top" Width="110" Margin="0,10,0,0" IsEditable="True"/>
+                        <ComboBox DisplayMemberPath="FullName" SelectedValuePath="UserId" HorizontalAlignment="Center" x:Name="UsersComboBox" VerticalAlignment="Top" Width="110" IsEditable="True" Margin="0,5,0,0" />
+                        <DatePicker Width="120" Name="GiveBookDatePicker" HorizontalAlignment="Center" Margin="0,5,0,0"/>
+                        <Button Content="Выдать" x:Name="MakeIssuanceButton" VerticalAlignment="Top" Click="MakeIssuanceButton_Click" Width="120" Margin="0,5,0,0"/>
                     </StackPanel>
-                    <Rectangle Fill="#FFF4F4F5" Height="1" Margin="1,106,371,0" Stroke="Black" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5" Grid.ColumnSpan="2">
-                        <Rectangle.RenderTransform>
-                            <TransformGroup>
-                                <ScaleTransform ScaleY="-1"/>
-                                <SkewTransform/>
-                                <RotateTransform/>
-                                <TranslateTransform/>
-                            </TransformGroup>
-                        </Rectangle.RenderTransform>
-                    </Rectangle>
-                    <ComboBox HorizontalAlignment="Left" Name="UsersComboBox" Margin="13,121,0,0" VerticalAlignment="Top" Width="110" IsEditable="True" SelectedValuePath="UserId"/>
-                    <ComboBox HorizontalAlignment="Left" Name="BooksComboBox" Margin="13,148,0,0" VerticalAlignment="Top" Width="110"/>
-                    <Button Content="Выдвть" Name="MakeIssuanceButton" Margin="33,175,25,0" VerticalAlignment="Top"/>
                 </Grid>
             </TabItem>            
         </TabControl>

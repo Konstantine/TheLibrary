@@ -25,7 +25,7 @@ namespace TheLibrary.Services
                 RequiredReturnDate = requredReturnDate,
                 IssuanceDate = DateTime.Now
             };
-            if (!_context.Users.Single(u => u.UserId == userId).IsBanned)
+            if (!_context.Users.ToList().Single(u => u.UserId == userId).IsBanned)
             {
                 _context.BookIssuances.Add(newIssuance);
                 _context.SaveChanges();

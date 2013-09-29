@@ -25,12 +25,13 @@ namespace TheLibrary
         private UserService UserService = new UserService();
         private BookIssuanceService IssuanceService = new BookIssuanceService();
         private BookService BookService = new BookService();
+        private AuthorService AuthorService = new AuthorService();
 
         public MainWindow()
         {
             InitializeComponent();
-            UsersComboBox.ItemsSource = UserService.GetAllUsers().Where(bu => !bu.IsBanned);
-            BooksComboBox.ItemsSource = BookService.GetAllBooks();
+            GiveBookDatePicker.SelectedDate = DateTime.Now.AddMonths(1);
+            AuthorsDataGrid.ItemsSource = AuthorService.GetAllAuthors();
         }
 
         private void AllAuthors_Click(object sender, RoutedEventArgs e)
@@ -60,9 +61,16 @@ namespace TheLibrary
 
         private void AverageRateButton_Click(object sender, RoutedEventArgs e)
         {
-            BooksDataGrid.ItemsSource = (new BookService()).GetAverageRateBook(int.Parse(YearRateTextBox.Text));
+            int year;
+            if (int.TryParse(YearRateTextBox.Text, out year))
+            {
+                BooksDataGrid.ItemsSource = (new BookService()).GetAverageRateBook(year);
+            }
+            else {
+                MessageBox.Show("Введите год", "Error");
+            }
         }
-
+               
         private void AllUsers_Click(object sender, RoutedEventArgs e)
         {
             UsersDataGrid.ItemsSource = UserService.GetAllUsers();
@@ -99,6 +107,39 @@ namespace TheLibrary
         private void OperationDataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             ReturnButton.IsEnabled = !((BookIssuance)OperationDataGrid.SelectedItem).RealReturnDate.HasValue;
+        }
+
+        private void MakeIssuanceButton_Click(object sender, RoutedEventArgs e)
+        {
+            IssuanceService.GiveBook((int)UsersComboBox.SelectedValue, (int)BooksComboBox.SelectedValue, GiveBookDatePicker.SelectedDate.Value);
+              OperationDataGrid.ItemsSource = IssuanceService.GetAllIssuance();
+        }
+         
+        private void TabControl_SelectionChanged_1(object sender, SelectionChangedEventArgs e)
+        {
+            if (e.AddedItems.OfType<TabItem>().Count() > 0)
+            {
+                TabItem selectedTabItem = e.AddedItems.OfType<TabItem>().First();
+                if (selectedTabItem == AuthorsTabItem)
+                {
+                    AuthorsDataGrid.ItemsSource = AuthorService.GetAllAuthors();
+                }
+                if (selectedTabItem == UsersTabItem)
+                {
+
+                    UsersDataGrid.ItemsSource = UserService.GetAllUsers();
+                }
+                if (selectedTabItem == BooksTabItem)
+                {
+                    BooksDataGrid.ItemsSource = BookService.GetAllBooks();
+                }
+                if (selectedTabItem == OperationTabItem)
+                {
+                    OperationDataGrid.ItemsSource = IssuanceService.GetAllIssuance();
+                    UsersComboBox.ItemsSource = UserService.GetAllUsers().Where(bu => !bu.IsBanned).Select(u => new { UserId = u.UserId, FullName = u.Name + " " + u.Lastname });
+                    BooksComboBox.ItemsSource = BookService.GetAllBooks();
+                }
+            }
         }
 
     }
