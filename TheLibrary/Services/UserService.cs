@@ -37,11 +37,8 @@ namespace TheLibrary.Services
             IEnumerable<User> result;
             result = (from user in _context.Users
                       where user.BookIssuances.Where(dt => dt.RequiredReturnDate < date && (!dt.RealReturnDate.HasValue || date < dt.RealReturnDate)).Count() > 0
-                      select new
-                      {
-                          User = user,
-                          BadAss = user.BookIssuances.Where(dt => dt.RequiredReturnDate < date && (!dt.RealReturnDate.HasValue || date < dt.RealReturnDate)).Count()
-                      }).OrderByDescending(b => b.BadAss).Select(u => u.User).Take(10).ToList();
+                      orderby user.BookIssuances.Where(dt => dt.RequiredReturnDate < date && (!dt.RealReturnDate.HasValue || date < dt.RealReturnDate)).Count() descending
+                      select user).Take(10).ToList();
             return result;
         }
     }
