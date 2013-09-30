@@ -152,14 +152,17 @@ namespace TheLibrary
         private void BadTopButton_Click(object sender, RoutedEventArgs e)
         {
             int year;
-            if (int.TryParse(BadTopYearTextBox.Text, out year) && year == DateTime.Now.Year)
-            {
-                UsersDataGrid.ItemsSource = UserService.GetTopBadUsers(DateTime.Now);
-            }
-            else
-            {
-                DateTime date = new DateTime(year, 12, 31);
+            DateTime date = new DateTime();
+            date = DateTime.Now;
+            
+            if (int.TryParse(BadTopYearTextBox.Text, out year) && date.Year == year )
+            {               
                 UsersDataGrid.ItemsSource = UserService.GetTopBadUsers(date);
+            }
+            else if (int.TryParse(BadTopYearTextBox.Text, out year))
+            {
+                DateTime date2 = new DateTime(year, 12, 31);
+                UsersDataGrid.ItemsSource = UserService.GetTopBadUsers(date2);
             }
         }
 

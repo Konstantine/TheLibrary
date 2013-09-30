@@ -75,7 +75,7 @@ namespace TheLibrary.Services
                 using (var context = new TheLibraryEntities())
                 {
                     result = (from book in context.Books
-                              where (book.PublishDate.Value.Year == publish && book.Name == name) || (book.Name == name) || (book.PublishDate.Value.Year == publish)
+                              where (book.PublishDate.Value.Year == publish && book.Name.Contains(name)) || (book.Name.Contains(name)) || (book.PublishDate.Value.Year == publish)
                               select book).ToList();
                 }
             }
@@ -84,7 +84,7 @@ namespace TheLibrary.Services
                 using (var context = new TheLibraryEntities())
                 {
                     result = (from book in context.Books
-                              where (book.Name == name)
+                              where book.Name.Contains(name)
                               select book).ToList();
                 }
             }
