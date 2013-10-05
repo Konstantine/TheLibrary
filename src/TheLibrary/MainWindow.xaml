@@ -21,9 +21,8 @@
                     </DataGrid>
                     <StackPanel>
                         <Button Content="Все" Name="AllAuthors" HorizontalAlignment="Center" VerticalAlignment="Top" Width="120" Margin="0,5,0,0" Click="AllAuthors_Click"/>
-                        <TextBox Height="23" Name="NamesakesTextBox" TextWrapping="Wrap" Text="Автор" Width="120" Margin="6,10,7,0" HorizontalAlignment="Center" VerticalAlignment="Top"/>
                         <Button Content="Однофамильцы" Name="Namesakes" HorizontalAlignment="Center" VerticalAlignment="Top" Width="120" Margin="6,5,7,0" Click="Namesakes_Click"/>
-                        <TextBox x:Name="YearTextBox" HorizontalAlignment="Center" Height="23" TextWrapping="Wrap" Text="2013" VerticalAlignment="Top" Width="120" Margin="6,10,7,0"/>
+                        <TextBox x:Name="YearTextBox" HorizontalAlignment="Center" Height="23" TextWrapping="Wrap" Text="Год" VerticalAlignment="Top" Width="120" Margin="6,10,7,0"/>
                         <Button Content="Популярные за год" Name="PopularInYear" HorizontalAlignment="Center" VerticalAlignment="Top" Width="120" Margin="6,5,7,0" Click="PopularInYear_Click"/>
                     </StackPanel>
                 </Grid>
@@ -47,7 +46,7 @@
                         <TextBox Height="23" Name="AuthorTextBox" TextWrapping="Wrap" Text="Автор" Width="120" Margin="0,10,0,0"/>
                         <Button Content="Книги Автора" Name="AuthorsBooksButton" Margin="0,5,0,0" Width="120" Click="AuthorsBooksButton_Click"/>
                         <TextBox Height="23" Name="YearRateTextBox" TextWrapping="Wrap" Text="Год" Width="120" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="6,10,7,0"/>
-                        <Button Content="'Выше среднего'" Name="AverageRateButton" HorizontalAlignment="Center" VerticalAlignment="Top" Width="120" Margin="0,5,0,0" Click="AverageRateButton_Click"/>
+                        <Button Content="Выше среднего" Name="AverageRateButton" HorizontalAlignment="Center" VerticalAlignment="Top" Width="120" Margin="0,5,0,0" Click="AverageRateButton_Click"/>
                         <TextBox HorizontalAlignment="Center" Name="PublishYearTextBox" Height="23" TextWrapping="Wrap" Text="Год публикации" VerticalAlignment="Top" Width="120" Margin="0,10,0,0"/>
                         <TextBox Height="23" TextWrapping="Wrap" Name="BookNameTextBox" Text="Название" Margin="0,5,0,0" HorizontalAlignment="Center" VerticalAlignment="Top" Width="120"/>
                         <Button Content="Найти" Name="UndefinedSearchButton" Margin="0,5,0,0" HorizontalAlignment="Center" VerticalAlignment="Top" Width="120" Click="UndefinedSearchButton_Click"/>

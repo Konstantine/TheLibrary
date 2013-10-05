@@ -53,15 +53,19 @@ namespace TheLibrary.Services
 
         public IEnumerable<Book> GetAverageRateBook(int year)
         {
-            IEnumerable<Book> result;
+            IEnumerable<Book> result = new List<Book>();
             using (var context = new TheLibraryEntities())
             {
-                int countBook = context.Books.Count();
-                int countIssuance = context.BookIssuances.Count(c => c.IssuanceDate.Year == year);
-                double averageRate = countIssuance / countBook;
-                result = (from book in context.Books.Include("Author")
-                          where book.BookIssuances.Where(i => i.IssuanceDate.Year == year).Count() > averageRate
-                          select book).ToList();
+                int countBook = (from book in context.Books
+                                 where book.BookIssuances.Where(i => i.IssuanceDate.Year == year).Count() > 0
+                                 select book).Count();
+                int countIssuance = context.BookIssuances.Where(c => c.IssuanceDate.Year == year).Count();
+                if (countBook != 0)
+                {
+                    result = (from book in context.Books.Include("Author")
+                              where book.BookIssuances.Where(i => i.IssuanceDate.Year == year).Count() >= countIssuance / countBook
+                              select book).ToList();
+                }                
             }
             return result;
         }
@@ -75,7 +79,7 @@ namespace TheLibrary.Services
                 using (var context = new TheLibraryEntities())
                 {
                     result = (from book in context.Books
-                              where (book.PublishDate.Value.Year == publish && book.Name.Contains(name)) || (book.Name.Contains(name)) || (book.PublishDate.Value.Year == publish)
+                              where (book.PublishDate.Value.Year == publish && book.Name.Contains(name))
                               select book).ToList();
                 }
             }

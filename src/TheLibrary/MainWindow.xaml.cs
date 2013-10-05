@@ -41,7 +41,15 @@ namespace TheLibrary
 
         private void PopularInYear_Click(object sender, RoutedEventArgs e)
         {
-            AuthorsDataGrid.ItemsSource = (new AuthorService()).GetPopularInYear(int.Parse(YearTextBox.Text));
+            int year;
+            if (int.TryParse(YearTextBox.Text, out year))
+            {
+                AuthorsDataGrid.ItemsSource = (new AuthorService()).GetPopularInYear(int.Parse(YearTextBox.Text));
+            }
+            else
+            {
+                MessageBox.Show("Укажите дату", "Error");
+            }
         }
 
         private void AllBooksButton_Click(object sender, RoutedEventArgs e)

@@ -25,7 +25,6 @@ namespace TheLibrary.Services
             using (var context = new TheLibraryEntities())
             {
                     result = (from author in context.Authors
-
                                    select new
                                    {
                                        Author = author,
@@ -36,7 +35,7 @@ namespace TheLibrary.Services
                                                           ).Sum()
                                    }).Where(a => a.PopularityIndex > 0)
                               .OrderByDescending(a => a.PopularityIndex)
-                              .Select(a => a.Author).ToList();
+                              .Select(a => a.Author).Take(1).ToList();
                 
             }
             return result;
@@ -45,11 +44,17 @@ namespace TheLibrary.Services
       
         public IEnumerable<Author> GetAllNamesakes()
         {
-            IEnumerable<Author> result;
+            List<Author> result = new List<Author>();
             using (var context = new TheLibraryEntities())
             {
-                result = (from author in context.Authors                          
-                          select author).OrderBy(a => a.Lastname).ToList();
+                var namesakes = (from author in context.Authors
+                                 group author by author.Lastname into g
+                                 select g).Where(k => k.Count() > 1).ToList();
+            
+                foreach (var namesake in namesakes)
+                {
+                    result.AddRange(namesake);
+                }
             }
             return result;  
         }
