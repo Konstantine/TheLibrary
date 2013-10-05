@@ -1,5 +1,5 @@
 # Build Folders (you can keep bin if you'd like, to store dlls and pdbs)
-[Bb]in/
+
 [Oo]bj/
 
 # mstest test results
@@ -88,10 +88,8 @@ csx
 # Windows Store app package directory
 AppPackages/
 
-# Others
-[Bb]in
+# Others 
 [Oo]bj
-sql
 TestResults
 [Tt]est[Rr]esult*
 *.Cache
