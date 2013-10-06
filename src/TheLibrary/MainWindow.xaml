@@ -1,7 +1,7 @@
 ﻿<Window x:Class="TheLibrary.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="MainWindow" Height="350" Width="525">
+        Title="MainWindow" Height="414.659" Width="525">
     <Window.Resources>
         <AlternationConverter x:Key="AlternationConverter"/>
     </Window.Resources>
@@ -22,7 +22,8 @@
                     <StackPanel>
                         <Button Content="Все" Name="AllAuthors" HorizontalAlignment="Center" VerticalAlignment="Top" Width="120" Margin="0,5,0,0" Click="AllAuthors_Click"/>
                         <Button Content="Однофамильцы" Name="Namesakes" HorizontalAlignment="Center" VerticalAlignment="Top" Width="120" Margin="6,5,7,0" Click="Namesakes_Click"/>
-                        <TextBox x:Name="YearTextBox" HorizontalAlignment="Center" Height="23" TextWrapping="Wrap" Text="Год" VerticalAlignment="Top" Width="120" Margin="6,10,7,0"/>
+                        <Label Content="Год:" Margin="0,10,0,0"/>
+                        <TextBox x:Name="YearTextBox" HorizontalAlignment="Center" Height="23" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Margin="6,0,7,0"/>
                         <Button Content="Популярные за год" Name="PopularInYear" HorizontalAlignment="Center" VerticalAlignment="Top" Width="120" Margin="6,5,7,0" Click="PopularInYear_Click"/>
                     </StackPanel>
                 </Grid>
@@ -43,12 +44,16 @@
                     <Grid HorizontalAlignment="Left" Height="100" Margin="5,46,0,0" VerticalAlignment="Top" Width="100" Grid.Column="1"/>
                     <StackPanel Margin="0">
                         <Button Content="Все" Name="AllBooksButton" HorizontalAlignment="Center" VerticalAlignment="Top" Width="120" Margin="0,5,0,0" Click="AllBooksButton_Click"/>
-                        <TextBox Height="23" Name="AuthorTextBox" TextWrapping="Wrap" Text="Автор" Width="120" Margin="0,10,0,0"/>
+                        <Label Content="Автор:" Margin="0,10,0,0"/>
+                        <TextBox Height="23" Name="AuthorTextBox" TextWrapping="Wrap" Width="120" Margin="0"/>
                         <Button Content="Книги Автора" Name="AuthorsBooksButton" Margin="0,5,0,0" Width="120" Click="AuthorsBooksButton_Click"/>
-                        <TextBox Height="23" Name="YearRateTextBox" TextWrapping="Wrap" Text="Год" Width="120" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="6,10,7,0"/>
+                        <Label Content="Год:" Margin="0,10,0,0"/>
+                        <TextBox Height="23" Name="YearRateTextBox" TextWrapping="Wrap" Width="120" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="6,0,7,0"/>
                         <Button Content="Выше среднего" Name="AverageRateButton" HorizontalAlignment="Center" VerticalAlignment="Top" Width="120" Margin="0,5,0,0" Click="AverageRateButton_Click"/>
-                        <TextBox HorizontalAlignment="Center" Name="PublishYearTextBox" Height="23" TextWrapping="Wrap" Text="Год публикации" VerticalAlignment="Top" Width="120" Margin="0,10,0,0"/>
-                        <TextBox Height="23" TextWrapping="Wrap" Name="BookNameTextBox" Text="Название" Margin="0,5,0,0" HorizontalAlignment="Center" VerticalAlignment="Top" Width="120"/>
+                        <Label Content="Год публикации:" Margin="0,10,0,0"/>
+                        <TextBox HorizontalAlignment="Center" Name="PublishYearTextBox" Height="23" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Margin="0"/>
+                        <Label Content="Название:" Margin="0,3,0,0"/>
+                        <TextBox Height="23" TextWrapping="Wrap" Name="BookNameTextBox" Margin="0" HorizontalAlignment="Center" VerticalAlignment="Top" Width="120"/>
                         <Button Content="Найти" Name="UndefinedSearchButton" Margin="0,5,0,0" HorizontalAlignment="Center" VerticalAlignment="Top" Width="120" Click="UndefinedSearchButton_Click"/>
                     </StackPanel>
                 </Grid>
@@ -70,7 +75,8 @@
                         <Button Content="Все" Name="AllUsers" HorizontalAlignment="Center" VerticalAlignment="Top" Width="120" Margin="0,5,0,0" Click="AllUsers_Click"/>
                         <DatePicker x:Name="BadDatePicker" Margin="6,10,7,0"/>
                         <Button Content="Задолжники на" Name="BadUsersButton" HorizontalAlignment="Center" VerticalAlignment="Top" Width="120" Margin="6.5,5,6.5,0" Click="BadUsersButton_Click"/>
-                        <TextBox HorizontalAlignment="Center" Name="BadTopYearTextBox" Height="23" TextWrapping="Wrap" Text="Год" VerticalAlignment="Top" Width="120" Margin="0,10,0,0"/>
+                        <Label Content="Год:" Margin="0,5,0,0"/>
+                        <TextBox HorizontalAlignment="Center" Name="BadTopYearTextBox" Height="23" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Margin="0"/>
                         <Button Content="Топ негодяев" Name="BadTopButton" Margin="0,5,0,0" HorizontalAlignment="Center" VerticalAlignment="Top" Width="120" Click="BadTopButton_Click"/>
                         <Button Content="Сохранить" Name="SaveUsersButton" HorizontalAlignment="Center"   Width="120" Click="SaveUsersButton_Click" Margin="0,10,0,0"/>
                     </StackPanel>
@@ -96,8 +102,10 @@
                         <Button Content="Все" Name="AllOperations" HorizontalAlignment="Center" VerticalAlignment="Top" Width="120" Margin="0,5,0,0" Click="AllOperations_Click"/>
                         <DatePicker x:Name="BadatePicker" Margin="6,10,7,0"/>
                         <Button Content="Вернул" Name="ReturnButton" HorizontalAlignment="Center" VerticalAlignment="Top" Width="120" Margin="6.5,5,6.5,0" Click="ReturnButton_Click" IsEnabled="False"/>
-                        <ComboBox DisplayMemberPath="Name"  SelectedValuePath="BookId" HorizontalAlignment="Center" Name="BooksComboBox" VerticalAlignment="Top" Width="120" Margin="0,10,0,0" IsEditable="True"/>
-                        <ComboBox DisplayMemberPath="FullName" SelectedValuePath="UserId" HorizontalAlignment="Center" x:Name="UsersComboBox" VerticalAlignment="Top" Width="120" IsEditable="True" Margin="0,5,0,0" />
+                        <Label Content="Книга:"/>
+                        <ComboBox DisplayMemberPath="Name"  SelectedValuePath="BookId" HorizontalAlignment="Center" Name="BooksComboBox" VerticalAlignment="Top" Width="120" Margin="0" IsEditable="True"/>
+                        <Label Content="Пользователь:"/>
+                        <ComboBox DisplayMemberPath="FullName" SelectedValuePath="UserId" HorizontalAlignment="Center" x:Name="UsersComboBox" VerticalAlignment="Top" Width="120" IsEditable="True" Margin="0" />
                         <DatePicker Width="120" Name="GiveBookDatePicker" HorizontalAlignment="Center" Margin="0,5,0,0"/>
                         <Button Content="Выдать" x:Name="MakeIssuanceButton" VerticalAlignment="Top" Click="MakeIssuanceButton_Click" Width="120" Margin="0,5,0,0"/>
                     </StackPanel>
